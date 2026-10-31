@@ -85,7 +85,6 @@ paper/       outline of the LAA manuscript
 - [ ] {α,β,γ}-cubic matrices (symbolic parameters) — see `docs/cubic.md`
 - [ ] 4 quadripotents (85 reduced LHS vs 255), 5 tripotents (121 LHS): feasibility limits
 
-## Authors
+## Author
 
-Emre Kişi (Sakarya University).
-License: MIT.
+Emre Kişi (Department of Mathematics, Sakarya University). License: MIT.
