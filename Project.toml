@@ -1,0 +1,7 @@
+name = "CommutingMatrixSpectra"
+uuid = "7d3f2c1a-5b6e-4e0f-9c2d-2a8e5f1b4c77"
+authors = ["Emre Kişi <ekisi@sakarya.edu.tr>", "Yunus Emre Karabulut"]
+version = "0.1.0"
+
+[compat]
+julia = "1.10"

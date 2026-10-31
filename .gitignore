@@ -1,0 +1,4 @@
+levels/
+*.bin
+*.tmp
+Manifest.toml

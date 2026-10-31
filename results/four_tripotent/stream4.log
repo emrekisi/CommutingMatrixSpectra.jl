@@ -1,0 +1,62 @@
+
+=== m=4 group-streamed, threads=12
+LHS vectors: 40 (sign-halved: true)
+level 1: 40
+level 2: 780 nonempty systems (from 780 candidate joins)  [0.06 s]  pool=4176  disk=0.0 MiB  maxrss=0.34 GiB
+level 3: 9868 nonempty systems (from 9880 candidate joins)  [1.92 s]  pool=51176  disk=0.9 MiB  maxrss=0.42 GiB
+level 4: 89012 nonempty systems (from 91246 candidate joins)  [18.63 s]  pool=185192  disk=11.9 MiB  maxrss=0.9 GiB
+level 5: 474924 nonempty systems (from 627720 candidate joins)  [2.08 s]  pool=185192  disk=31.0 MiB  maxrss=1.02 GiB
+level 6: 1722100 nonempty systems (from 2192775 candidate joins)  [1.13 s]  pool=185192  disk=74.7 MiB  maxrss=1.02 GiB
+level 7: 4658912 nonempty systems (from 5371343 candidate joins)  [2.5 s]  pool=185192  disk=168.6 MiB  maxrss=1.05 GiB
+level 8: 10101817 nonempty systems (from 10795039 candidate joins)  [7.42 s]  pool=185192  disk=340.7 MiB  maxrss=1.1 GiB
+level 9: 18285720 nonempty systems (from 18825948 candidate joins)  [16.16 s]  pool=185192  disk=605.0 MiB  maxrss=1.1 GiB
+level 10: 28207286 nonempty systems (from 28548296 candidate joins)  [25.37 s]  pool=185192  disk=937.6 MiB  maxrss=1.1 GiB
+level 11: 37422144 nonempty systems (from 37595880 candidate joins)  [41.26 s]  pool=185192  disk=1264.2 MiB  maxrss=1.1 GiB
+level 12: 42833939 nonempty systems (from 42904466 candidate joins)  [56.32 s]  pool=185192  disk=1478.8 MiB  maxrss=1.1 GiB
+level 13: 42301416 nonempty systems (from 42323443 candidate joins)  [69.46 s]  pool=185192  disk=1496.3 MiB  maxrss=1.1 GiB
+level 14: 35977404 nonempty systems (from 35982356 candidate joins)  [76.21 s]  pool=185192  disk=1305.1 MiB  maxrss=1.1 GiB
+level 15: 26263544 nonempty systems (from 26264252 candidate joins)  [68.22 s]  pool=185192  disk=977.2 MiB  maxrss=1.1 GiB
+level 16: 16374314 nonempty systems (from 16374362 candidate joins)  [52.33 s]  pool=185192  disk=624.7 MiB  maxrss=1.1 GiB
+level 17: 8658416 nonempty systems (from 8658416 candidate joins)  [32.77 s]  pool=185192  disk=338.6 MiB  maxrss=1.1 GiB
+level 18: 3846300 nonempty systems (from 3846300 candidate joins)  [18.53 s]  pool=185192  disk=154.1 MiB  maxrss=1.1 GiB
+level 19: 1416840 nonempty systems (from 1416840 candidate joins)  [8.53 s]  pool=185192  disk=58.1 MiB  maxrss=1.1 GiB
+level 20: 425040 nonempty systems (from 425040 candidate joins)  [3.19 s]  pool=185192  disk=17.8 MiB  maxrss=1.1 GiB
+level 21: 101200 nonempty systems (from 101200 candidate joins)  [0.99 s]  pool=185192  disk=4.3 MiB  maxrss=1.1 GiB
+level 22: 18400 nonempty systems (from 18400 candidate joins)  [0.3 s]  pool=185192  disk=0.8 MiB  maxrss=1.1 GiB
+level 23: 2400 nonempty systems (from 2400 candidate joins)  [0.08 s]  pool=185192  disk=0.1 MiB  maxrss=1.1 GiB
+level 24: 200 nonempty systems (from 200 candidate joins)  [0.01 s]  pool=185192  disk=0.0 MiB  maxrss=1.1 GiB
+level 25: 8 nonempty systems (from 8 candidate joins)  [0.0 s]  pool=185192  disk=0.0 MiB  maxrss=1.1 GiB
+level 26: 0 nonempty systems (from 0 candidate joins)  [0.0 s]  pool=185192  disk=0.0 MiB  maxrss=1.1 GiB
+closure level 1: closed so far 40  [0.0 s]
+closure level 2: closed so far 820  [0.01 s]
+closure level 3: closed so far 10636  [0.0 s]
+closure level 4: closed so far 93802  [0.02 s]
+closure level 5: closed so far 293242  [0.14 s]
+closure level 6: closed so far 394052  [0.49 s]
+closure level 7: closed so far 412796  [1.12 s]
+closure level 8: closed so far 415724  [2.12 s]
+closure level 9: closed so far 415916  [3.69 s]
+closure level 10: closed so far 415916  [5.71 s]
+closure level 11: closed so far 415916  [7.63 s]
+closure level 12: closed so far 415916  [8.94 s]
+closure level 13: closed so far 415916  [8.28 s]
+closure level 14: closed so far 415916  [7.25 s]
+closure level 15: closed so far 415916  [5.83 s]
+closure level 16: closed so far 415916  [3.64 s]
+closure level 17: closed so far 415916  [1.73 s]
+closure level 18: closed so far 415916  [0.69 s]
+closure level 19: closed so far 415916  [0.28 s]
+closure level 20: closed so far 415916  [0.08 s]
+closure level 21: closed so far 415916  [0.02 s]
+closure level 22: closed so far 415916  [0.0 s]
+closure level 23: closed so far 415916  [0.0 s]
+closure level 24: closed so far 415916  [0.0 s]
+closure level 25: closed so far 415916  [0.0 s]
+closure level 26: closed so far 415916  [0.0 s]
+
+nonempty systems: 279192024   closed systems: 415916   orbits: 3058   finished=true
+pool: 185192 components (134016 points);  verified 609793296 point-memberships;  times: enumeration 505.72 s, closure 57.72 s, orbits 0.29 s
+sizes: [40, 780, 9868, 89012, 474924, 1722100, 4658912, 10101817, 18285720, 28207286, 37422144, 42833939, 42301416, 35977404, 26263544, 16374314, 8658416, 3846300, 1416840, 425040, 101200, 18400, 2400, 200, 8, 0]
+joins: [0, 780, 9880, 91246, 627720, 2192775, 5371343, 10795039, 18825948, 28548296, 37595880, 42904466, 42323443, 35982356, 26264252, 16374362, 8658416, 3846300, 1416840, 425040, 101200, 18400, 2400, 200, 8, 0]
+times: [0.0, 0.06, 1.92, 18.63, 2.08, 1.13, 2.5, 7.42, 16.16, 25.37, 41.26, 56.32, 69.46, 76.21, 68.22, 52.33, 32.77, 18.53, 8.53, 3.19, 0.99, 0.3, 0.08, 0.01, 0.0, 0.0]
+report written
