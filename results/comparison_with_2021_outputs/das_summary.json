@@ -1,0 +1,30 @@
+{
+ "4quad": {
+  "systems": 2516,
+  "groups": 2400,
+  "skipped": 6,
+  "max_n": 2516,
+  "sec": 7
+ },
+ "3cubic": {
+  "systems": 3303,
+  "groups": 3395,
+  "skipped": 10,
+  "max_n": 3303,
+  "sec": 17
+ },
+ "4trip": {
+  "systems": 70216,
+  "groups": 805,
+  "skipped": 55190,
+  "max_n": 101371,
+  "sec": 27
+ },
+ "3quadri": {
+  "systems": 40021,
+  "groups": 386,
+  "skipped": 9,
+  "max_n": 41269,
+  "sec": 41
+ }
+}

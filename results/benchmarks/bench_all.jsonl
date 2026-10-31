@@ -1,0 +1,8 @@
+{"key":"3tripotent","lhs":13,"nonempty":1899,"closed":582,"orbits":53,"orbits_nz":47,"maxk":9,"paper_scope":371,"time_s":0.15,"maxrss_mib":427.4,"threads":12,"bysize":"[1 => 13, 2 => 78, 3 => 280, 4 => 485, 5 => 516, 6 => 343, 7 => 144, 8 => 36, 9 => 4]"}
+{"key":"4involutive","lhs":8,"nonempty":254,"closed":254,"orbits":14,"orbits_nz":14,"maxk":7,"paper_scope":162,"time_s":0.13,"maxrss_mib":415.2,"threads":12,"bysize":"[1 => 8, 2 => 28, 3 => 56, 4 => 70, 5 => 56, 6 => 28, 7 => 8]"}
+{"key":"2quadripotent","lhs":5,"nonempty":15,"closed":15,"orbits":5,"orbits_nz":4,"maxk":2,"paper_scope":15,"time_s":1.94,"maxrss_mib":419.6,"threads":12,"bysize":"[1 => 5, 2 => 10]"}
+{"key":"3quadripotent","lhs":21,"nonempty":14779,"closed":3367,"orbits":103,"orbits_nz":98,"maxk":9,"paper_scope":1531,"time_s":14.6,"maxrss_mib":775.2,"threads":12,"bysize":"[1 => 21, 2 => 210, 3 => 1300, 4 => 3996, 5 => 4833, 6 => 2988, 7 => 1152, 8 => 252, 9 => 27]"}
+{"key":"2cubic","lhs":9,"nonempty":45,"closed":45,"orbits":45,"orbits_nz":45,"maxk":2,"paper_scope":45,"time_s":1.81,"maxrss_mib":424.6,"threads":12,"bysize":"[1 => 9, 2 => 36]"}
+{"key":"3quadratic","lhs":8,"nonempty":98,"closed":98,"orbits":98,"orbits_nz":98,"maxk":4,"paper_scope":92,"time_s":1.86,"maxrss_mib":424.8,"threads":12,"bysize":"[1 => 8, 2 => 28, 3 => 56, 4 => 6]"}
+{"key":"4quadratic","lhs":16,"nonempty":3572,"closed":2612,"orbits":2612,"orbits_nz":2612,"maxk":6,"paper_scope":2492,"time_s":3.12,"maxrss_mib":486.8,"threads":12,"bysize":"[1 => 16, 2 => 120, 3 => 560, 4 => 1796, 5 => 912, 6 => 168]"}
+{"key":"3cubic","lhs":27,"nonempty":3438,"closed":3438,"orbits":3438,"orbits_nz":3438,"maxk":4,"paper_scope":3276,"time_s":12.46,"maxrss_mib":589.2,"threads":12,"bysize":"[1 => 27, 2 => 351, 3 => 2898, 4 => 162]"}

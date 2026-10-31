@@ -6,6 +6,8 @@ module CommutingMatrixSpectra
 
 include("engine.jl")          # modules TripotentLC (reference, RAM), Streamed, Pooled, GroupStream (disk-streamed, parallel)
 include("fields.jl")          # Eis = Q(√-3) = Q(ω) for quadripotent problems
+include("theorems.jl")        # LaTeX theorem items (block-form pattern matrices)
+include("groups_writer.jl")   # "n-th group" listings of all closed systems and their solutions
 
 using .TripotentLC: CharacterizationInput, run_characterization, write_report, lhs_vectors, unit_group
 export CharacterizationInput, run_characterization, write_report, lhs_vectors, unit_group, Eis, ω

@@ -860,7 +860,6 @@ function enumerate_stream(inp::CharacterizationInput{T}; outdir="levels", max_le
                           log=stdout, time_limit=Inf) where T
     m = nmat(inp); mkpath(outdir)
     L, symmetric = lhs_vectors(inp); n = length(L); target = inp.target
-    n <= 64 || error("UInt64 closure masks support at most 64 LHS vectors (got $n)")
     pool = Pool{T}()
     level = Level()
     for i in 1:n
@@ -889,6 +888,7 @@ function lam_masks(pool::Pool)
 end
 """Stream all level files; closure(S) = AND of component masks; keep distinct masks (+ one id list each)."""
 function closures_stream(res; log=stdout)
+    length(res.L) <= 64 || error("UInt64 closure masks support at most 64 LHS vectors (got $(length(res.L)))")
     masks = lam_masks(res.pool); ispoint = res.pool.ispoint
     closed = Dict{UInt64,Vector{Int32}}(); lk = ReentrantLock(); nver = Threads.Atomic{Int}(0)
     for k in 1:res.nlevels
