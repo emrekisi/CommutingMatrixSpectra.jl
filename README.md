@@ -87,5 +87,5 @@ paper/       outline of the LAA manuscript
 
 ## Authors
 
-Emre Kişi (Sakarya University) and Yunus Emre Karabulut (TÜBİTAK 2209-A project).
+Emre Kişi (Sakarya University).
 License: MIT.
