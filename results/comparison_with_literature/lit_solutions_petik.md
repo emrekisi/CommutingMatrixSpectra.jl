@@ -1,0 +1,66 @@
+## Petik–Özdemir–Gökmen (2022): kübik × kuadratik, serbest {α3,β3} hedefi — jenerik parametrelerde çözülebilir blok yapıları (Teorem 2.7 çerçevesi: γ1-bloğu ve γ1-dışı blok boş değil)
+
+Gösterim: {α3-grubu} / {β3-grubu}: bileşen. 2-desenli yapılarda a1,a2 serbesttir (α3,β3 belirlenir); üçüncü bileşen 'skaler' durumdur (iki desen aynı değeri alır, A3 skaler).
+
+- P = {(α1,α2), (γ1,α2)}
+    - {(α1,α2)} / {(γ1,α2)}: a1, a2 serbest; α3 = a1*alpha1 + a2*alpha2; β3 = a1*gamma1 + a2*alpha2
+- P = {(α1,α2), (γ1,β2)}
+    - {(α1,α2)} / {(γ1,β2)}: a1, a2 serbest; α3 = a1*alpha1 + a2*alpha2; β3 = a1*gamma1 + a2*beta2
+    - {(α1,α2), (γ1,β2)} / ∅: a2/a1 = -(alpha1 - gamma1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*gamma1)/(alpha2 - beta2); β3 = serbest
+- P = {(α1,β2), (γ1,α2)}
+    - {(α1,β2)} / {(γ1,α2)}: a1, a2 serbest; α3 = a1*alpha1 + a2*beta2; β3 = a1*gamma1 + a2*alpha2
+    - {(α1,β2), (γ1,α2)} / ∅: a2/a1 = (alpha1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - beta2*gamma1)/(alpha2 - beta2); β3 = serbest
+- P = {(α1,β2), (γ1,β2)}
+    - {(α1,β2)} / {(γ1,β2)}: a1, a2 serbest; α3 = a1*alpha1 + a2*beta2; β3 = a1*gamma1 + a2*beta2
+- P = {(β1,α2), (γ1,α2)}
+    - {(β1,α2)} / {(γ1,α2)}: a1, a2 serbest; α3 = a1*beta1 + a2*alpha2; β3 = a1*gamma1 + a2*alpha2
+- P = {(β1,α2), (γ1,β2)}
+    - {(β1,α2)} / {(γ1,β2)}: a1, a2 serbest; α3 = a1*beta1 + a2*alpha2; β3 = a1*gamma1 + a2*beta2
+    - {(β1,α2), (γ1,β2)} / ∅: a2/a1 = -(beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2); β3 = serbest
+- P = {(β1,β2), (γ1,α2)}
+    - {(β1,β2)} / {(γ1,α2)}: a1, a2 serbest; α3 = a1*beta1 + a2*beta2; β3 = a1*gamma1 + a2*alpha2
+    - {(β1,β2), (γ1,α2)} / ∅: a2/a1 = (beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha2*beta1 - beta2*gamma1)/(alpha2 - beta2); β3 = serbest
+- P = {(β1,β2), (γ1,β2)}
+    - {(β1,β2)} / {(γ1,β2)}: a1, a2 serbest; α3 = a1*beta1 + a2*beta2; β3 = a1*gamma1 + a2*beta2
+- P = {(α1,α2), (α1,β2), (γ1,α2)}
+    - {(α1,α2)} / {(α1,β2), (γ1,α2)}: a2/a1 = (alpha1 - gamma1)/(alpha2 - beta2); α3 = a1*(2*alpha1*alpha2 - alpha1*beta2 - alpha2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha1*alpha2 - beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,α2), (α1,β2), (γ1,β2)}
+    - {(α1,α2), (γ1,β2)} / {(α1,β2)}: a2/a1 = -(alpha1 - gamma1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha1*alpha2 - 2*alpha1*beta2 + beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,α2), (β1,α2), (γ1,β2)}
+    - {(α1,α2)} / {(β1,α2), (γ1,β2)}: a2/a1 = -(beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - alpha1*beta2 - alpha2*beta1 + alpha2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2)
+    - {(α1,α2), (γ1,β2)} / {(β1,α2)}: a2/a1 = -(alpha1 - gamma1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*gamma1)/(alpha2 - beta2); β3 = -a1*(alpha1*alpha2 - alpha2*beta1 - alpha2*gamma1 + beta1*beta2)/(alpha2 - beta2)
+- P = {(α1,α2), (β1,β2), (γ1,α2)}
+    - {(α1,α2)} / {(β1,β2), (γ1,α2)}: a2/a1 = (beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - alpha1*beta2 + alpha2*beta1 - alpha2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha2*beta1 - beta2*gamma1)/(alpha2 - beta2)
+    - {(α1,α2), (β1,β2)} / {(γ1,α2)}: a2/a1 = -(alpha1 - beta1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*beta1)/(alpha2 - beta2); β3 = -a1*(alpha1*alpha2 - alpha2*beta1 - alpha2*gamma1 + beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,α2), (β1,β2), (γ1,β2)}
+    - {(α1,α2), (β1,β2)} / {(γ1,β2)}: a2/a1 = -(alpha1 - beta1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*beta1)/(alpha2 - beta2); β3 = -a1*(alpha1*beta2 - alpha2*gamma1 - beta1*beta2 + beta2*gamma1)/(alpha2 - beta2)
+    - {(α1,α2), (γ1,β2)} / {(β1,β2)}: a2/a1 = -(alpha1 - gamma1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*gamma1)/(alpha2 - beta2); β3 = -a1*(alpha1*beta2 - alpha2*beta1 + beta1*beta2 - beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,α2), (γ1,α2), (γ1,β2)}
+    - {(α1,α2), (γ1,β2)} / {(γ1,α2)}: a2/a1 = -(alpha1 - gamma1)/(alpha2 - beta2); α3 = -a1*(alpha1*beta2 - alpha2*gamma1)/(alpha2 - beta2); β3 = -a1*(alpha1*alpha2 - 2*alpha2*gamma1 + beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,β2), (β1,α2), (γ1,α2)}
+    - {(α1,β2), (β1,α2)} / {(γ1,α2)}: a2/a1 = (alpha1 - beta1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - beta1*beta2)/(alpha2 - beta2); β3 = a1*(alpha1*alpha2 - alpha2*beta1 + alpha2*gamma1 - beta2*gamma1)/(alpha2 - beta2)
+    - {(α1,β2), (γ1,α2)} / {(β1,α2)}: a2/a1 = (alpha1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - beta2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha1*alpha2 + alpha2*beta1 - alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2)
+- P = {(α1,β2), (β1,α2), (γ1,β2)}
+    - {(α1,β2)} / {(β1,α2), (γ1,β2)}: a2/a1 = -(beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - alpha1*beta2 - beta1*beta2 + beta2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2)
+    - {(α1,β2), (β1,α2)} / {(γ1,β2)}: a2/a1 = (alpha1 - beta1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - beta1*beta2)/(alpha2 - beta2); β3 = a1*(alpha1*beta2 + alpha2*gamma1 - beta1*beta2 - beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,β2), (β1,β2), (γ1,α2)}
+    - {(α1,β2)} / {(β1,β2), (γ1,α2)}: a2/a1 = (beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - alpha1*beta2 + beta1*beta2 - beta2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha2*beta1 - beta2*gamma1)/(alpha2 - beta2)
+    - {(α1,β2), (γ1,α2)} / {(β1,β2)}: a2/a1 = (alpha1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - beta2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha1*beta2 + alpha2*beta1 - beta1*beta2 - beta2*gamma1)/(alpha2 - beta2)
+- P = {(α1,β2), (γ1,α2), (γ1,β2)}
+    - {(α1,β2), (γ1,α2)} / {(γ1,β2)}: a2/a1 = (alpha1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha1*alpha2 - beta2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha1*beta2 + alpha2*gamma1 - 2*beta2*gamma1)/(alpha2 - beta2)
+- P = {(β1,α2), (β1,β2), (γ1,α2)}
+    - {(β1,α2)} / {(β1,β2), (γ1,α2)}: a2/a1 = (beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(2*alpha2*beta1 - alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2); β3 = a1*(alpha2*beta1 - beta2*gamma1)/(alpha2 - beta2)
+- P = {(β1,α2), (β1,β2), (γ1,β2)}
+    - {(β1,α2), (γ1,β2)} / {(β1,β2)}: a2/a1 = -(beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2); β3 = a1*(alpha2*beta1 - 2*beta1*beta2 + beta2*gamma1)/(alpha2 - beta2)
+- P = {(β1,α2), (γ1,α2), (γ1,β2)}
+    - {(β1,α2), (γ1,β2)} / {(γ1,α2)}: a2/a1 = -(beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha2*gamma1 - beta1*beta2)/(alpha2 - beta2); β3 = -a1*(alpha2*beta1 - 2*alpha2*gamma1 + beta2*gamma1)/(alpha2 - beta2)
+- P = {(β1,β2), (γ1,α2), (γ1,β2)}
+    - {(β1,β2), (γ1,α2)} / {(γ1,β2)}: a2/a1 = (beta1 - gamma1)/(alpha2 - beta2); α3 = a1*(alpha2*beta1 - beta2*gamma1)/(alpha2 - beta2); β3 = a1*(alpha2*gamma1 + beta1*beta2 - 2*beta2*gamma1)/(alpha2 - beta2)
+
+### Sadece parametre bağıntısı altında çözülebilen 4-desenli yapılar (Teorem 2.7'nin (a4),(a10),(a15) maddeleri)
+- P = {(a1,a2), (a1,b2), (b1,a2), (g1,b2)} : bağıntı -(alpha2 - beta2)*(2*alpha1 - beta1 - gamma1) = 0
+- P = {(a1,a2), (a1,b2), (b1,b2), (g1,a2)} : bağıntı -(alpha2 - beta2)*(2*alpha1 - beta1 - gamma1) = 0
+- P = {(a1,a2), (b1,a2), (b1,b2), (g1,b2)} : bağıntı (alpha2 - beta2)*(alpha1 - 2*beta1 + gamma1) = 0
+- P = {(a1,a2), (b1,b2), (g1,a2), (g1,b2)} : bağıntı -(alpha2 - beta2)*(alpha1 + beta1 - 2*gamma1) = 0
+- P = {(a1,b2), (b1,a2), (b1,b2), (g1,a2)} : bağıntı -(alpha2 - beta2)*(alpha1 - 2*beta1 + gamma1) = 0
+- P = {(a1,b2), (b1,a2), (g1,a2), (g1,b2)} : bağıntı (alpha2 - beta2)*(alpha1 + beta1 - 2*gamma1) = 0
