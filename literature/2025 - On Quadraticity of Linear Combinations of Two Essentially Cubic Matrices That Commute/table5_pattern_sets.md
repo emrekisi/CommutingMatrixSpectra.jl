@@ -1,8 +1,8 @@
-# Ek A — Demirkol–Ünlütürk (2025) Tablo 5 durumlarının desen kümelerine çevrilmesi
+# Appendix A — Block structures of the cases in Table 5 of Demirkol–Ünlütürk (2025) as pattern sets
 
-Gösterim: (x,y) = (A1 özdeğeri, A2 özdeğeri) bloğu; 'k' desen sayısı; 'jenerik' = cebirsel bağımsız parametrelerde çözülebilir bileşen sayısı; 'bağıntı' = yalnız bu polinom(lar) sıfırken çözülebilir.
+Notation: (x,y) = block with eigenvalue x of A1 and y of A2; k = number of patterns; 'generic' = number of solution components for algebraically independent parameters; 'on relation' = components that exist only when the listed polynomial(s) vanish.
 
-| Durum | Desen kümesi | k | Esas kübik | Jenerik bileşen | Bağıntı altında bileşen | Teorem 8 maddesi |
+| Case | Pattern set | k | Essentially cubic | Generic components | Components on relation locus | Item of Theorem 8 |
 |---|---|---|---|---|---|---|
 | (i)-(5) | {(p1,r2), (q1,p2), (r1,q2)} | 3 | ✓ | 3 | 1 | 1 |
 | (i)-(5) | {(p1,r2), (q1,p2), (q1,r2), (r1,q2)} | 4 | ✓ | 0 | 2 [-p1*q2 + p1*r2 + p2*q1 - p2*r1 + q1*q2 - 2*q1*r2 + r1*r2] | 1 |

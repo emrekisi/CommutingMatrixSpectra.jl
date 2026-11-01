@@ -1,5 +1,5 @@
 """Coefficient conditions of [PÖG22] Theorem 2.7 (item1_eqs) and [DÜ25] Theorem 8 (item_eqs), transcribed from the papers,
-and the helpers used for the numerical tests in the session (see literatur_karsilastirma.md).  c2 of Theorem 8 is taken with a2
+and the helpers used for the numerical tests in the session (see literature/*/comparison.md).  c2 of Theorem 8 is taken with a2
 (the theorem statement has a typo a1).  Globals pp1..rr2, W (= {1:p1, 2:q1}) hold the numeric parameter values."""
 import sympy as sp, re, itertools
 

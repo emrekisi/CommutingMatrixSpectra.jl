@@ -1,8 +1,8 @@
-# Ek B — İki değişmeli tripotent matris, kuadratik (serbest {p3,q3}) kombinasyon: bizim yöntemle bulunan esas-kübik kapalı blok yapıları ve Teorem 8 kapsaması
+# Appendix B — Two commuting tripotent matrices, quadratic (free {p3,q3}) combination: essentially-cubic closed block structures found by our method and their coverage by Theorem 8
 
-u = (a1,a2,p3,q3) homojen; her bileşen C^4'te bir doğru (a sabit orana kadar, hedef {p3,q3} ölçeklenir). 'etiketleme' = (p1,q1,r1),(p2,q2,r2) olarak {1,-1,0}'ın hangi sıralamasının alındığı (36 seçenek).
+u = (a1,a2,p3,q3) homogeneous; every component is a line in C^4 (a up to a common scale, the target {p3,q3} scales with it). 'Labelling' = which ordering of {1,-1,0} is taken as (p1,q1,r1) and as (p2,q2,r2) (36 choices).
 
-| Blok yapısı | k | Bileşenler (a1,a2; p3,q3) | Tablo 5'te kapsandığı etiketleme sayısı /36 | (1,-1,0),(1,-1,0) etiketlemesinde kapsanıyor mu |
+| Block structure | k | Components (a1,a2,p3,q3) | Labellings (of 36) in which the structure appears in Table 5 | Covered under the labelling (1,-1,0),(1,-1,0)? |
 |---|---|---|---|---|
 | {(1,1), (-1,-1), (0,0)} | 3 | (-a2, a2, p3, 0); (-a2, a2, 0, q3) | 36 | ✓ |
 | {(1,1), (-1,0), (0,-1)} | 3 | (2*q3, -q3, -2*q3, q3); (q3/2, q3/2, -q3/2, q3); (q3/2, -q3, -q3/2, q3); (-q3, 2*q3, -2*q3, q3); (-q3, q3/2, -q3/2, q3); (-q3, -q3, -2*q3, q3) | 36 | ✓ |

@@ -69,6 +69,6 @@ julia test/runtests.jl
 carry a PARTIAL warning. The pattern matrices in `results/theorems/*.tex` list, with each row λ, also
 its unit multiples (−λ for tripotent/involutive problems; ωλ, ω²λ for quadripotent problems).
 
-`literature/<year - paper title>/`: the free-target variant of the algorithm (unknowns (a1,a2,p3,q3), `scripts/free_target.jl`) applied to the problems of Petik–Özdemir–Gökmen (2022) and Demirkol–Ünlütürk (2025), with item-by-item comparison (`karsilastirma.md` in each folder, Turkish; method notes in `literature/README.md`).
+`literature/<year - paper title>/`: the free-target variant of the algorithm (unknowns (a1,a2,p3,q3), `scripts/free_target.jl`) applied to the problems of Petik–Özdemir–Gökmen (2022) and Demirkol–Ünlütürk (2025), with item-by-item comparison (`comparison.md` in each folder; method notes in `literature/README.md`).
 
 Author: Emre Kişi (Sakarya University). License: MIT.
