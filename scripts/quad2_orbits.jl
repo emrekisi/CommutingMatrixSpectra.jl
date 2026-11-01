@@ -1,5 +1,6 @@
 
-include("TripotentLC.jl"); include("fields.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 σq = Eis[ω, ω^2, Eis(1), Eis(0)]
 inp = CharacterizationInput([σq, σq], σq)
 r = run_characterization(inp; verbose=false)

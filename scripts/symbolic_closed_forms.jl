@@ -2,7 +2,7 @@
 # symbolic_closed_forms.jl <quad4|cubic3> — structure from a random rational specialisation (exact, Rational{Int128}),
 # closed forms from AbstractAlgebra's fraction field, one small symbolic RREF per solution component.
 using AbstractAlgebra, Random
-include("TripotentLC.jl"); include("fields.jl"); include("theorems.jl"); include("groups_writer.jl")
+include(joinpath(@__DIR__, "common.jl"))
 using .TripotentLC, .Theorems, .Groups
 using .TripotentLC: Affine, rref_aug, nonzero_ok, dim
 kind = ARGS[1]

@@ -3,7 +3,7 @@
 # Each characteristic = G-orbit of a closed system without zero columns; representative = canonical member.
 module Theorems
 using ..TripotentLC
-using ..TripotentLC: Affine, dim, closure, canon_set, symmetry_group
+using ..TripotentLC: Affine, dim, closure, canon_set, symmetry_group, combinations_
 
 # ---------- number formatting ----------
 texnum(x::Rational) = denominator(x) == 1 ? string(numerator(x)) :
@@ -49,7 +49,10 @@ function tex_affine(a::Affine, m)
         for j in 1:m
             iszero(row[j]) && continue
             coef = row[j] == 1 ? "" : (row[j] == -1 ? "-" : texnum(row[j]))
-            push!(terms, (isempty(terms) || startswith(coef, "-") ? "" : "+") * (coef == "" ? "" : coef * " ") * "c_$j")
+            # a composite coefficient (a sum such as 1+2ω, or a leading sign inside) must be parenthesised
+            composite = toplevel_sum(coef)
+            composite && (coef = "(" * coef * ")")
+            push!(terms, (isempty(terms) || (startswith(coef, "-") && !startswith(coef, "(")) ? "" : "+") * (coef == "" ? "" : coef * " ") * "c_$j")
         end
         push!(eqs, join(terms))
     end
@@ -74,7 +77,7 @@ function tex_subspaces(subs, m; pm=false, units=nothing)
         sort!(rhs; by=string)
         pref = pm ? "\\pm" : (units !== nothing && length(units) > 1 ? "U\\cdot" : "")
         lhs = length(exprs) == 1 ? exprs[1] : "(" * join(exprs, ",\\ ") * ")"
-        rhss = length(exprs) == 1 ? join(texnum.(first.(rhs)), ",") : join(["(" * join(texnum.(b), ",") * ")" for b in rhs], ",\\ ")
+        rhss = length(exprs) == 1 ? join(texnum.(first.(rhs)), ",") : join(["(" * join(texnum.(b), ",") * ")" for b in rhs], ",\\allowbreak\\ ")
         push!(out, lhs * "\\in " * pref * "\\{" * rhss * "\\}")
     end
     out
@@ -93,14 +96,32 @@ function tex_solutions(sol, m; pm::Bool=false, units=nothing)
         end
         sort!(cs; by=string)
         pref = pm ? "\\pm" : (units !== nothing && length(units) > 1 ? "U\\cdot" : "")
-        push!(out, "(c_1,\\dots,c_$m)\\in " * pref * "\\{" * join(["(" * join(texnum.(c), ",") * ")" for c in cs], ",\\ ") * "\\}")
+        push!(out, "(" * join(["c_$j" for j in 1:m], ",") * ")\\in " * pref * "\\{" * join(["(" * join(texnum.(c), ",") * ")" for c in cs], ",\\allowbreak\\ ") * "\\}")
     end
     append!(out, tex_subspaces(subs, m; pm, units))
     join(out, " \\text{ or } ")
 end
 
 # ---------- pattern matrix ----------
-tex_pattern(L, S, m) = "\\begin{bmatrix}" * join([join(texnum.(L[s]), "&") for s in S], "\\\\") * "\\end{bmatrix}"
+"""A coefficient is a sum (needs parentheses) if it contains + or - outside braces, not counting a leading sign."""
+function toplevel_sum(s::AbstractString)
+    depth = 0
+    for (i, ch) in enumerate(s)
+        ch == '{' && (depth += 1); ch == '}' && (depth -= 1)
+        depth == 0 && i > 1 && (ch == '+' || ch == '-') && return true
+    end
+    false
+end
+
+"""Pattern matrix; with `units` the U-multiples of every row are appended (±λ for tripotents:
+the block structure may contain λ and −λ, cf. Remark 1 of Kişi et al. 2021)."""
+function tex_pattern(L, S, m; units=nothing)
+    rows = [L[s] for s in S]
+    if units !== nothing && length(units) > 1
+        for u in units; isone(u) && continue; append!(rows, [u .* L[s] for s in S]); end
+    end
+    "\\begin{bmatrix}" * join([join(texnum.(r), "&") for r in rows], "\\\\") * "\\end{bmatrix}"
+end
 
 # ---------- minimal generating set size of a closed system ----------
 function min_generating_size(C, closed_sol, single, m)
@@ -112,18 +133,6 @@ function min_generating_size(C, closed_sol, single, m)
         end
     end
     k
-end
-function combinations_(v, s)
-    n = length(v); out = Vector{Vector{eltype(v)}}()
-    idx = collect(1:s)
-    while true
-        push!(out, v[idx])
-        i = s
-        while i ≥ 1 && idx[i] == n - s + i; i -= 1; end
-        i == 0 && break
-        idx[i] += 1; for j in i+1:s; idx[j] = idx[j-1] + 1; end
-    end
-    out
 end
 
 """characteristics(r, inp; m) -> vector of named tuples sorted by (#blocks, pattern); zero-column orbits dropped."""
@@ -145,14 +154,15 @@ function characteristics(r, inp)
 end
 
 """Write theorem items. label = letter prefix (e.g. "d"); mprev = 2021 scope (k ≤ m) marker."""
-function write_theorem(path, r, inp; label="d", pm=false, units=nothing, symbol="T", mprev=length(inp.spectra), preamble="")
+function write_theorem(path, r, inp; label="d", pm=false, units=nothing, symbol="T", mprev=length(inp.spectra), preamble="", pattern_units=nothing)
     m = length(inp.spectra); chars = characteristics(r, inp)
     open(path, "w") do io
         println(io, preamble)
         println(io, "\\begin{enumerate}")
         for (k, ch) in enumerate(chars)
             tag = ch.gen <= mprev ? "" : "\\,\\newitem"
-            println(io, "\\item[($label$k)$tag] \$", tex_solutions(ch.sol, m; pm, units), "\$ and \$P=", tex_pattern(r.L, ch.S, m), "\$;")
+            prow = pattern_units === nothing ? nothing : pattern_units
+            println(io, "\\item[($label$k)$tag] \$", tex_solutions(ch.sol, m; pm, units), "\$ and \$P=", tex_pattern(r.L, ch.S, m; units=prow), "\$;")
         end
         println(io, "\\end{enumerate}")
     end

@@ -1,7 +1,7 @@
 
 # bench_classical.jl — classical multi-RHS RREF (2021 algorithm, every k-subset, k ≤ m)
 # versus the intersection method (TripotentLC.enumerate_systems) — Julia, exact Rational{Int64}.
-include("TripotentLC.jl")
+include(joinpath(@__DIR__, "..", "scripts", "common.jl"))
 using .TripotentLC: CharacterizationInput, lhs_vectors, Affine, nonzero_ok, enumerate_systems
 const Q = Rational{Int64}
 const OPS = Ref{Int}(0)          # scalar field operations (inv, mul, sub) in the elimination kernels
@@ -123,7 +123,7 @@ end
 function check(m, maxk)
     inp = inputfor(m)
     cres, _, _ = classical_all(inp, maxk)
-    _, _, all_systems = enumerate_systems(inp; verbose=false, max_level=maxk)
+    _, _, all_systems, _ = enumerate_systems(inp; verbose=false, max_level=maxk)
     mism = count(S -> get(all_systems, S, Set{Affine{Q}}()) != cres[S], keys(cres)) + count(S -> !haskey(cres, S), keys(all_systems))
     (; method="check", m, maxk, compared=length(cres), mismatches=mism)
 end

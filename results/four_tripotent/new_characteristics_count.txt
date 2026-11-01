@@ -1,0 +1,5 @@
+Output of scripts/count_new_4tripotent.jl (12 threads):
+closures of systems with <=4 equations: closed=93802 orbits=794 orbits_nz=741 exhaustive=false [122.0 s]
+
+Hence 3005 - 741 = 2264 characteristics without zero column (3058 - 794 = 2264 in total) cannot be generated
+by four or fewer equations: these are the "new" characteristics of Table 1 of the paper.

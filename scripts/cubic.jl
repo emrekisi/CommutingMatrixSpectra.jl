@@ -4,7 +4,7 @@
 # nine symbolic parameters (AbstractAlgebra.jl fraction field); zero tests are polynomial
 # identities, so the output is the GENERIC characterization + the exceptional parameter set.
 using AbstractAlgebra
-include("TripotentLC.jl")
+include(joinpath(@__DIR__, "common.jl"))
 using .TripotentLC
 const AA = AbstractAlgebra
 

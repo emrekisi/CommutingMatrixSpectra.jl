@@ -1,6 +1,7 @@
 
 using AbstractAlgebra
-include("TripotentLC.jl"); include("fields.jl"); include("theorems.jl"); include("groups_writer.jl"); using .TripotentLC, .Theorems, .Groups
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC, .Theorems, .Groups
 function go(inp, path, title)
     r = run_characterization(inp; verbose=false); gs = Groups.groups_from_result(r, inp)
     Groups.write_groups(path, title, r.L, length(inp.spectra), gs)

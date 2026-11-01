@@ -1,5 +1,6 @@
 
-include("TripotentLC.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 const GS = TripotentLC.GroupStream
 const Q = Rational{Int64}
 inp = CharacterizationInput([Q[1,-1,0] for _ in 1:5], Q[1,-1,0])

@@ -1,5 +1,5 @@
 
-include("TripotentLC.jl"); include("fields.jl"); include("theorems.jl"); include("groups_writer.jl")
+include(joinpath(@__DIR__, "common.jl"))
 using .TripotentLC, .Theorems, .Groups
 const Q = Rational{Int64}
 function go(inp, path, title)

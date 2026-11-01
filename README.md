@@ -50,6 +50,20 @@ r = run_characterization(inp)            # start Julia with  -t auto
 write_report("three_tripotent.md", r, inp; title = "Three commuting tripotent matrices")
 ```
 See `scripts/` for the group listings (`gen_groups.jl`), the theorem items (`gen_theorems.jl`),
-the streamed four-tripotent run (`gen_groups4.jl`) and the symbolic problems (`symbolic_closed_forms.jl`).
+the streamed four-tripotent run (`gen_groups4.jl`), the count of new four-tripotent characteristics
+(`count_new_4tripotent.jl`) and the symbolic problems (`symbolic_closed_forms.jl`, `gen_cubic_thm.jl`,
+`run_3quadratic.jl`, `run_4quadratic.jl`, `cubic.jl`). Every script loads the sources through
+`scripts/common.jl` (paths relative to the repository), so it can be run from any directory:
+
+```
+julia -t 12 scripts/run3.jl
+julia --project=scripts/symbolic -e 'using Pkg; Pkg.instantiate()'    # once; AbstractAlgebra for the symbolic scripts
+julia --project=scripts/symbolic -t 12 scripts/gen_cubic_thm.jl
+julia test/runtests.jl
+```
+
+`Result.exhaustive` is `false` when a run was cut by `max_level`; reports written from such a result
+carry a PARTIAL warning. The pattern matrices in `results/theorems/*.tex` list, with each row λ, also
+its unit multiples (−λ for tripotent/involutive problems; ωλ, ω²λ for quadripotent problems).
 
 Author: Emre Kişi (Sakarya University). License: MIT.

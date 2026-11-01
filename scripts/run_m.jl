@@ -1,5 +1,6 @@
 
-include("TripotentLC.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 const Q = Rational{Int64}
 m = parse(Int, ARGS[1]); maxlev = parse(Int, ARGS[2]); logpath = ARGS[3]
 log = open(logpath, "a")

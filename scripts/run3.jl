@@ -1,5 +1,6 @@
 
-include("TripotentLC.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 const Q = Rational{Int64}
 inp = TripotentLC.CharacterizationInput([Q[1,-1,0], Q[1,-1,0], Q[1,-1,0]], Q[1,-1,0])
 println("threads = ", Threads.nthreads())

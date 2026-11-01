@@ -19,7 +19,10 @@ const Q = Rational{Int64}
 struct CharacterizationInput{T}
     spectra::Vector{Vector{T}}   # σ(X_i), i = 1..m
     target::Vector{T}            # σ(X)
+    # repeated eigenvalues describe the same spectrum: deduplicate (order preserved)
+    CharacterizationInput{T}(spectra, target) where T = new{T}([unique(s) for s in spectra], unique(target))
 end
+CharacterizationInput(spectra::Vector{Vector{T}}, target::Vector{T}) where T = CharacterizationInput{T}(spectra, target)
 nmat(inp::CharacterizationInput) = length(inp.spectra)
 
 # ------------------------------------------------- multiplicative symmetry -
@@ -33,11 +36,12 @@ end
 """Global unit group: every u that stabilizes all σ(X_i) and σ(X) (sorted, contains 1)."""
 function unit_group(inp::CharacterizationInput{T}) where T
     us = [u for u in unit_candidates(inp.target) if stabilizes(u, inp.target) && all(σ -> stabilizes(u, σ), inp.spectra)]
+    isempty(us) && push!(us, one(T))          # e.g. target {0}: only the trivial unit
     sort!(us)
 end
 """Per-matrix unit groups: u with u·σ(X_i) = σ(X_i)  (X_i → uX_i keeps the matrix type)."""
-coordinate_unit_groups(inp::CharacterizationInput) =
-    [sort!([u for u in unit_candidates(σ) if stabilizes(u, σ)]) for σ in inp.spectra]
+coordinate_unit_groups(inp::CharacterizationInput{T}) where T =
+    [(us = [u for u in unit_candidates(σ) if stabilizes(u, σ)]; isempty(us) ? [one(T)] : sort!(us)) for σ in inp.spectra]
 # representative of the orbit U·λ: lexicographic maximum (for U = {±1} this is "first nonzero > 0")
 canon_unit(λ::Vector{T}, U) where T = maximum(u .* λ for u in U)
 
@@ -179,7 +183,23 @@ function enumerate_systems(inp::CharacterizationInput{T}; verbose=true, max_leve
         merge!(all_systems, nxt)
         level = nxt
     end
-    return L, single, all_systems
+    exhaustive = isempty(level)                 # false when max_level stopped the enumeration
+    return L, single, all_systems, exhaustive
+end
+
+"""All s-element sub-vectors of v (lexicographic order of index sets)."""
+function combinations_(v, s)
+    n = length(v); out = Vector{Vector{eltype(v)}}()
+    s > n && return out
+    idx = collect(1:s)
+    while true
+        push!(out, v[idx])
+        i = s
+        while i ≥ 1 && idx[i] == n - s + i; i -= 1; end
+        i == 0 && break
+        idx[i] += 1; for j in i+1:s; idx[j] = idx[j-1] + 1; end
+    end
+    out
 end
 
 # ------------------------------------------------- closure & symmetry ------
@@ -238,12 +258,13 @@ struct Result{T}
     closed::Dict{Vector{Int},Set{Affine{T}}}
     orbits::Dict{Vector{Int},Vector{Vector{Int}}}   # canonical closed S => members
     timings::Dict{String,Float64}
+    exhaustive::Bool                                # false if the enumeration was cut by max_level
 end
 
 function run_characterization(inp::CharacterizationInput{T}; verbose=true, max_level=typemax(Int), log=stdout) where T
     m = nmat(inp)
     timings = Dict{String,Float64}()
-    t = @elapsed (L, single, all_systems) = enumerate_systems(inp; verbose, max_level, log)
+    t = @elapsed (L, single, all_systems, exhaustive) = enumerate_systems(inp; verbose, max_level, log)
     timings["enumeration"] = t
     t = @elapsed begin
         closed = Dict{Vector{Int},Set{Affine{T}}}()
@@ -286,7 +307,8 @@ function run_characterization(inp::CharacterizationInput{T}; verbose=true, max_l
         for (k, v) in sort(collect(timings)); println(log, "  ", rpad(k, 13), " ", round(v; digits=3), " s"); end
         flush(log)
     end
-    Result(L, all_systems, closed, orbits, timings)
+    exhaustive || (verbose && println(log, "WARNING: enumeration stopped at max_level=$max_level — results are partial"))
+    Result(L, all_systems, closed, orbits, timings, exhaustive)
 end
 
 # ------------------------------------------------- report -----------------
@@ -317,6 +339,7 @@ function write_report(path, res::Result{T}, inp::CharacterizationInput{T}; title
     m = nmat(inp)
     open(path, "w") do io
         println(io, "# ", title)
+        res.exhaustive || println(io, "\n**WARNING: the enumeration was stopped by max_level — this report is PARTIAL (systems, closed systems and characteristics are lower bounds).**")
         println(io, "\nLHS vectors (λ = eigenvalue pattern of (X1,…,Xm)): ", length(res.L))
         println(io, "Nonempty systems: ", length(res.all_systems), "  |  closed systems: ", length(res.closed),
                     "  |  characteristics (orbits under sign/permutation symmetry): ", length(res.orbits))
@@ -467,7 +490,7 @@ function enumerate_streamed(inp::CharacterizationInput{T}; outdir="levels", max_
         level = nxt                                     # previous level dropped
         GC.gc()
     end
-    finished = isempty(level) || k >= max_level
+    finished = isempty(level)
     return (; L, single, sizes, njoins, times, nlevels=k, finished, outdir)
 end
 
@@ -606,22 +629,27 @@ function intersect_ids(A::Vector{Int32}, B::Vector{Int32}, pool::Pool{T}, L, tar
         if A[i] == B[j]; push!(out, A[i]); i += 1; j += 1
         elseif A[i] < B[j]; i += 1 else j += 1 end
     end
-    Anp = [a for a in A if !pool.ispoint[a]]; Bnp = [b for b in B if !pool.ispoint[b]]
+    # snapshot of the pool entries we need, taken under the pool lock (intern! may grow the
+    # vectors concurrently; reading a growing Vector without the lock is a data race)
+    compA, ptA, compB, ptB = lock(pool.lock) do
+        ([pool.comps[a] for a in A], [pool.ispoint[a] for a in A], [pool.comps[b] for b in B], [pool.ispoint[b] for b in B])
+    end
+    Anp = [compA[k] for k in eachindex(A) if !ptA[k]]; Bnp = [compB[k] for k in eachindex(B) if !ptB[k]]
     isempty(Anp) && isempty(Bnp) && return out
     # 2) point of A inside a non-point of B (and vice versa)
-    for a in A
-        pool.ispoint[a] || continue
-        p = point_coords(pool.comps[a], m)
-        any(b -> point_in(pool.comps[b], p, m), Bnp) && push!(out, a)
+    for k in eachindex(A)
+        ptA[k] || continue
+        p = point_coords(compA[k], m)
+        any(b -> point_in(b, p, m), Bnp) && push!(out, A[k])
     end
-    for b in B
-        pool.ispoint[b] || continue
-        p = point_coords(pool.comps[b], m)
-        any(a -> point_in(pool.comps[a], p, m), Anp) && push!(out, b)
+    for k in eachindex(B)
+        ptB[k] || continue
+        p = point_coords(compB[k], m)
+        any(a -> point_in(a, p, m), Anp) && push!(out, B[k])
     end
     # 3) non-point ∩ non-point : RREF, intern result
     for a in Anp, b in Bnp
-        rows = rref_aug(vcat(pool.comps[a].rows, pool.comps[b].rows), m)
+        rows = rref_aug(vcat(a.rows, b.rows), m)
         rows === nothing && continue
         nonzero_ok(rows, m) || continue
         push!(out, intern!(pool, Affine(rows), L, target, m))
@@ -721,7 +749,7 @@ function enumerate_pooled(inp::CharacterizationInput{T}; outdir="levels", max_le
         println(log, "level $k: $(length(nxt)) nonempty systems (from $nj candidate joins)  [$(round(time()-t0; digits=2)) s]  pool=$(length(pool.comps))  disk=$(round(filesize(joinpath(outdir, "level_$k.bin"))/2^20; digits=1)) MiB  maxrss=$(round(Sys.maxrss()/2^30; digits=2)) GiB"); flush(log)
         level = nxt; GC.gc()
     end
-    finished = isempty(level) || k >= max_level
+    finished = isempty(level)
     (; L, pool, sizes, njoins, times, nlevels=k, finished, outdir)
 end
 
@@ -824,19 +852,24 @@ function next_level_file(path_in, path_out, pool::Pool{T}, L, target, m) where T
     end
     ntask = Threads.nthreads()
     workers = @async begin
-        @sync for t in 1:ntask
-            Threads.@spawn for (seq, g) in seqch
-                out = Rec[]; nj = 0
-                for i in 1:length(g), j in i+1:length(g)
-                    nj += 1
-                    sol = intersect_ids(g[i][2], g[j][2], pool, L, target, m)
-                    isempty(sol) && continue
-                    push!(out, (vcat(g[i][1], g[j][1][end]), sol))
+        try
+            @sync for t in 1:ntask
+                Threads.@spawn for (seq, g) in seqch
+                    out = Rec[]; nj = 0
+                    for i in 1:length(g), j in i+1:length(g)
+                        nj += 1
+                        sol = intersect_ids(g[i][2], g[j][2], pool, L, target, m)
+                        isempty(sol) && continue
+                        push!(out, (vcat(g[i][1], g[j][1][end]), sol))
+                    end
+                    put!(results, (seq, out, nj))
                 end
-                put!(results, (seq, out, nj))
             end
+            close(results)
+        catch err
+            close(results, err)          # a worker failure terminates the consumer loop with the error instead of a hang
+            rethrow()
         end
-        close(results)
     end
     nrec = 0; njoins = 0
     open(path_out, "w") do io
@@ -878,7 +911,7 @@ function enumerate_stream(inp::CharacterizationInput{T}; outdir="levels", max_le
         println(log, "level $k: $nrec nonempty systems (from $nj candidate joins)  [$(round(time()-t0; digits=2)) s]  pool=$(length(pool.comps))  disk=$(round(filesize(joinpath(outdir, "level_$k.bin"))/2^20; digits=1)) MiB  maxrss=$(round(Sys.maxrss()/2^30; digits=2)) GiB"); flush(log)
         GC.gc()
     end
-    finished = sizes[end] == 0 || k >= max_level
+    finished = sizes[end] == 0            # exhaustive only if the last level is empty (not when max_level/time_limit stopped it)
     (; L, pool, sizes, njoins, times, nlevels=k, finished, outdir)
 end
 

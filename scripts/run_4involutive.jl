@@ -1,5 +1,6 @@
 
-include("TripotentLC.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 const Q = Rational{Int64}
 inp = CharacterizationInput([Q[1, -1] for _ in 1:4], Q[1, -1, 0])
 t = @elapsed r = run_characterization(inp; verbose=true)

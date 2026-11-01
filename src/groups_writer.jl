@@ -3,7 +3,7 @@
 # every characteristic (G-orbit of closed systems) with all its member systems and their solutions.
 module Groups
 using ..TripotentLC
-using ..TripotentLC: Affine, dim, fmt_affine, fmtq, canon_set, symmetry_group
+using ..TripotentLC: Affine, dim, fmt_affine, fmtq, canon_set, symmetry_group, combinations_
 
 ordinal(n) = string(n, (n % 100 in 11:13) ? "th" : n % 10 == 1 ? "st" : n % 10 == 2 ? "nd" : n % 10 == 3 ? "rd" : "th")
 fmtpat(λ) = "(" * join(fmtq.(λ), ",") * ")"
@@ -50,7 +50,7 @@ function groups_from_result(r, inp)
         gen = length(S)
         for s in 1:length(S)
             found = false
-            for sub in Main.Theorems.combinations_(S, s)
+            for sub in combinations_(S, s)
                 reduce((A, B) -> TripotentLC.intersect_sets(A, B, m), (single[i] for i in sub)) == sol && (found = true; break)
             end
             found && (gen = s; break)

@@ -2,3 +2,4 @@ LHS vectors: 121 (unit group: Rational{Int64}[-1, 1])
 level 1: 121
 level 2: 7260 nonempty systems (from 7260 candidate joins)  [1.8 s]  pool=44698  disk=0.4 MiB  maxrss=0.35 GiB
 level 3: 287960 nonempty systems (from 287980 candidate joins)  [221.04 s]  pool=2292858  disk=30.7 MiB  maxrss=2.23 GiB
+level 4 (C(121,4) = 8 495 410 candidate joins) did not finish within 100 min on 12 threads; level_4.bin had reached 0.91 GiB when the run was stopped.

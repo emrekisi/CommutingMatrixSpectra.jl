@@ -1,6 +1,7 @@
 
 # bench_all.jl <key> — one problem per process: counts, wall time, peak RSS (Sys.maxrss), threads
-include("TripotentLC.jl"); include("fields.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 using Random
 const Q = Rational{Int64}
 key = ARGS[1]

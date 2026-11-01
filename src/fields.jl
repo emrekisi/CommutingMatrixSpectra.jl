@@ -20,7 +20,7 @@ function Base.inv(x::Eis)
 end
 Base.:/(x::Eis, y::Eis) = x * inv(y)
 Base.:(==)(x::Eis, y::Eis) = x.a == y.a && x.b == y.b
-Base.hash(x::Eis, h::UInt) = hash(x.b, hash(x.a, h))
+Base.hash(x::Eis, h::UInt) = iszero(x.b) ? hash(x.a, h) : hash(x.b, hash(x.a, h))   # consistent with hash of equal Rational/Integer values
 Base.iszero(x::Eis) = iszero(x.a) && iszero(x.b)
 Base.isone(x::Eis) = isone(x.a) && iszero(x.b)
 Base.zero(::Type{Eis}) = Eis(0//1, 0//1);  Base.one(::Type{Eis}) = Eis(1//1, 0//1)

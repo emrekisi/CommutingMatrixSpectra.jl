@@ -1,6 +1,7 @@
 
 using AbstractAlgebra
-include("TripotentLC.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 names = ["α1","β1","α2","β2","α3","β3","α4","β4","α","β"]
 Rp, v = polynomial_ring(QQ, names); F = fraction_field(Rp); const T = elem_type(F)
 hasmethod(isless, Tuple{T,T}) || (Base.isless(a::T, b::T) = isless(string(a), string(b)))

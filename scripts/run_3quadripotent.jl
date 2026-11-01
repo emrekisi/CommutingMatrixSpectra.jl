@@ -1,5 +1,5 @@
 
-include("TripotentLC.jl"); include("fields.jl")
+include(joinpath(@__DIR__, "common.jl"))
 using .TripotentLC
 σq = Eis[ω, ω^2, Eis(1), Eis(0)]
 inp = TripotentLC.CharacterizationInput([σq, σq, σq], σq)

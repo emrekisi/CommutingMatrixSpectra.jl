@@ -1,5 +1,5 @@
 
-include("TripotentLC.jl"); include("fields.jl")
+include(joinpath(@__DIR__, "common.jl"))
 using .TripotentLC
 const Q = Rational{Int64}
 # 1) Complex{Rational} cannot hold ω
@@ -24,5 +24,5 @@ TripotentLC.write_report("report_2quadripotent.md", r2, inp2; title="Two commuti
 inp3q = TripotentLC.CharacterizationInput([σq, σq, σq], σq)
 L3, U3 = TripotentLC.lhs_vectors(inp3q)
 println("3 quadripotent: LHS after unit halving = ", length(L3), " (paper: 63 without ω-reduction), U = ", U3)
-t = @elapsed (L, single, allsys) = TripotentLC.enumerate_systems(inp3q; verbose=true, max_level=5)
+t = @elapsed (L, single, allsys, _) = TripotentLC.enumerate_systems(inp3q; verbose=true, max_level=5)
 println("3 quadripotent up to level 5: nonempty=", length(allsys), " in ", round(t; digits=2), " s")

@@ -1,7 +1,8 @@
 
 # generic_eval.jl  <kind: quad4|cubic3> <seed>  — specialise symbolic parameters at random rationals (Schwartz–Zippel),
 # run the FULL overdetermined enumeration with exact Rational{Int128} arithmetic and dump systems for comparison.
-include("TripotentLC.jl"); using .TripotentLC
+include(joinpath(@__DIR__, "common.jl"))
+using .TripotentLC
 using Random
 const Q = Rational{Int128}
 kind, seed = ARGS[1], parse(Int, ARGS[2])
@@ -17,7 +18,7 @@ spectra = [Q[vals[names[per*(i-1)+j]] for j in 1:per] for i in 1:m]
 target = Q[vals[n] for n in names[end-per+1:end]]
 name_of = Dict(v => n for (n, v) in vals)
 inp = CharacterizationInput(spectra, target)
-t = @elapsed (L, single, allsys) = TripotentLC.enumerate_systems(inp; verbose=true)
+t = @elapsed (L, single, allsys, _) = TripotentLC.enumerate_systems(inp; verbose=true)
 bysize = Dict{Int,Int}(); for S in keys(allsys); bysize[length(S)] = get(bysize, length(S), 0) + 1; end
 println(kind, " seed=", seed, ": LHS=", length(L), " nonempty=", length(allsys), " by size ", sort(collect(bysize)), " [", round(t; digits=1), " s]")
 open("vals_$(kind)_$(seed).txt", "w") do io; for n in names; println(io, n, "\t", numerator(vals[n]), "/", denominator(vals[n])); end; end
