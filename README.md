@@ -37,8 +37,11 @@ solution set, and all member systems with their solutions. `thm_*.tex` are the t
 | results/four_quadratic | 4 quadratic (symbolic) | 16 | 3 572 | 2 612 | 2 612 |
 | results/four_tripotent | 4 tripotent | 40 | 279 192 024 | 415 916 | 3 058 |
 
-`results/comparison_with_2021_outputs/` compares the Mathematica outputs of the 2021 paper with these
-results system by system; `results/benchmarks/` holds timings and the five-tripotent feasibility run.
+The [comparison with the 2021 outputs](results/comparison_with_2021_outputs/das_comparison.md)
+compares the paper's Mathematica outputs with these results system by system.
+The [benchmark report](results/benchmarks/bench_classical_vs_intersection.md) compares classical
+multiple-right-hand-side RREF with intersection; `results/benchmarks/` also holds timings and
+the five-tripotent feasibility run.
 
 ## Usage
 
